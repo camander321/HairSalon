@@ -11,6 +11,7 @@ namespace HairSalon.Models.Tests
     public ClientTest()
     {
       DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=3306;database=cameron_anderson_test;";
+      Client.Clear();
     }
     
     public void Dispose()

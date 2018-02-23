@@ -17,6 +17,10 @@ namespace HairSalon.Models
       _firstName = firstName;
     }
     
+    public int GetId() {return _id;}
+    public string GetFirst() {return _firstName;}
+    public string GetLast() {return _lastName;}
+    
     public override bool Equals(System.Object otherStylist)
     {
       if (!(otherStylist is Stylist))
@@ -47,6 +51,49 @@ namespace HairSalon.Models
         conn.Dispose();
     }
     
+    public Client AddClient(string lastName, string firstName)
+    {
+      Client newClient = new Client(lastName, firstName, _id);
+      newClient.Save();
+      return newClient;
+    }
+    
+    public Client AddClient(Client newClient)
+    {
+      newClient.SetStylist(_id);
+      newClient.Save();
+      return newClient;
+    }
+    
+    public List<Client> GetClients()
+    {
+      List<Client> clients = new List<Client>();
+      
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM clients WHERE stylist = @stylist;";
+      cmd.Parameters.Add(new MySqlParameter("@stylist", _id));
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+      while(rdr.Read())
+      {
+        int id = rdr.GetInt32(0);
+        string lastName = rdr.GetString(1);
+        string firstName = rdr.GetString(2);
+        int stylistId = rdr.GetInt32(3);
+        Client newClient = new Client(lastName, firstName, stylistId, id);
+        clients.Add(newClient);
+      }
+      
+      conn.Close();
+      if (conn != null)
+        conn.Dispose();
+      
+      return clients;
+    }
+    
     public static List<Stylist> GetAll()
     {
       List<Stylist> allStylist = new List<Stylist>();
@@ -57,10 +104,9 @@ namespace HairSalon.Models
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT * FROM stylists;";
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
-      Console.WriteLine("starting reader");
       while(rdr.Read())
       {
-        Console.WriteLine("reading");
+
         int id = rdr.GetInt32(0);
         string lastName = rdr.GetString(1);
         string firstName = rdr.GetString(2);
