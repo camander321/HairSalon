@@ -1,0 +1,8 @@
+@{
+  Layout = "_Layout";
+  var client = Model["client"];
+  var stylist = Model["stylist"];
+}
+
+<h3>Name: @client.GetFirst() @client.GetLast()</h3>
+<h3>Stylist: @stylist.GetFirst() @stylist.GetLast()</h3>

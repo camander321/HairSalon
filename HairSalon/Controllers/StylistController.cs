@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using HairSalon.Models;
+using System;
+using System.Collections.Generic;
 
 namespace HairSalon.Controllers
 {
@@ -31,7 +33,11 @@ namespace HairSalon.Controllers
     [HttpGet("/stylists/{id}")]
     public ActionResult Show(int id)
     {
-      return View("StylistDetails");
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Stylist stylist = Stylist.Find(id);
+      model.Add("stylist", stylist);
+      model.Add("clients", stylist.GetClients());
+      return View("StylistDetails", model);
     }
   }
 }

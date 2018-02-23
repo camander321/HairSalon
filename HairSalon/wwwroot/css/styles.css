@@ -1,3 +1,16 @@
 body {
-  background-color: lightgray;
+  background-image: url("../img/bg.jpg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  text-align: center;
+}
+
+#content {
+  margin-top: 50px;
+}
+
+.well {
+  background-color: #000000dd;
 }

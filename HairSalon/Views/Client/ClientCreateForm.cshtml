@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+
+<form action="/" method="post">
+  <input class="form-control" name="first" placeholder="First Name">
+  <input class="form-control" name="last" placeholder="Last Name">
+  
+  <select class="form-control" name="stylist">
+    @{
+      foreach (var stylist in Model)
+      {
+        <option value='@stylist.GetId()'>@stylist.GetFirst() @stylist.GetLast()</option>
+      }
+    }
+  </select>
+
+  <button class="form-control bn btn-info">Add Client</button>
+</form>

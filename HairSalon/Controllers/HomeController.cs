@@ -11,5 +11,13 @@ namespace HairSalon.Controllers
     {
       return View("Index");
     }
+    
+    [HttpPost("/")]
+    public ActionResult NewClient()
+    {
+      Stylist stylist = Stylist.Find(int.Parse(Request.Form["stylist"]));
+      stylist.AddClient(Request.Form["last"], Request.Form["first"]);
+      return View("Index");
+    }
   }
 }
