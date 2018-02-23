@@ -73,7 +73,7 @@ namespace HairSalon.Models
       conn.Open();
       
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM clients WHERE stylist = @stylist;";
+      cmd.CommandText = @"SELECT * FROM clients WHERE stylist = @stylist ORDER BY last_name, first_name;";
       cmd.Parameters.Add(new MySqlParameter("@stylist", _id));
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
 
@@ -102,7 +102,7 @@ namespace HairSalon.Models
       conn.Open();
       
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM stylists;";
+      cmd.CommandText = @"SELECT * FROM stylists ORDER BY last_name, first_name;";
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {

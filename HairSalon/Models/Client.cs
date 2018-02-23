@@ -68,7 +68,7 @@ namespace HairSalon.Models
       conn.Open();
       
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM clients;";
+      cmd.CommandText = @"SELECT * FROM clients ORDER BY last_name, first_name;";
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {

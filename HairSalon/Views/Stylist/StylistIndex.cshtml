@@ -1,0 +1,12 @@
+@{
+  Layout = "_Layout";
+  
+  foreach (var stylist in Model)
+  {
+    <h3><a href='/stylists/@stylist.GetId()'>@stylist.GetFirst() @stylist.GetLast()</a></h3>
+  }
+}
+
+
+<a href="/stylists/new">Add a new stylist</a>
+<a href="/">Return to Home</a>
