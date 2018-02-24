@@ -14,23 +14,45 @@ A website to keep track of a hair salon's employees and all  of their clients.
   - Example output: return Stylist creation form
   
 - Gather form input and add details into stylist table in database
-  - Example input: First:John, Last:Smith, StartDate:02/23/2018
-  - Example output: INSERT INTO `stylists` (last, first, start_date) VALUES ('Smith', 'John', 2018_23_02);
+  - Example input: First:John, Last:Smith
+  - Example output: INSERT INTO `stylists` (last, first) VALUES ('Smith', 'John');
+  
+- Show list of all stylists
+  - Example input: user clicks 'show all stylists'
+  - Example output: shows list of all stylists
+ 
+- Show all of a stylist's clients
+  - Example input: user clicks a stylist's name
+  - Example output: shows list of all clients with that stylist
     
 - User clicks 'add a new client'
   - Example input: "user clicks link"
   - Example output: return Client creation form
   
 - Gather form input and add details into client table in database
-  - Example input: First:Hugh, Last:Jackman, NextAppt:05/01/2018
-  - Example output: INSERT INTO `stylists` (last, first, appt) VALUES ('Jackman', 'Hugh', 2018_05_01);
+  - Example input: First:Hugh, Last:Jackman
+  - Example output: INSERT INTO `stylists` (last, first) VALUES ('Jackman', 'Hugh');
+  
+- Show list of all clients
+  - Example input: user clicks 'show all clients'
+  - Example output: shows list of all clients
+ 
+- Showa clients details
+  - Example input: user clicks a clients's name
+  - Example output: shows the client's details, including their stylist
   
 
-    
-
-
+  
+  
 ## Setup/Installation Requirements
-
+* Start MAMP 
+* Run MySQL with `mysql -uroot -proot`
+* Use the following commands to create the database:
+  * `CREATE DATABASE IF NOT EXISTS cameron_anderson DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;`
+  * `USE cameron_anderson;`
+  * `CREATE TABLE clients (id int(11), last_name varchar(255), first_name varchar(255), stylist int(11)) ENGINE=InnoDB DEFAULT CHARSET=utf8;`
+  * `CREATE TABLE stylists (id int(11), last_name varchar(255), first_name varchar(255)) ENGINE=InnoDB DEFAULT CHARSET=utf8;`
+  * `\q`
 * Clone the git repository from 'https://github.com/camander321/HairSalon.git'.
 * run the command 'dotnet restore' to download the necessary packages.
 * run the command 'dotnet run' to build and run the server on localhost.
