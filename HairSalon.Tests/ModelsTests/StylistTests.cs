@@ -39,8 +39,8 @@ namespace HairSalon.Models.Tests
       
       Stylist stylist1 = new Stylist("smith", "john");
       stylist1.Save();  
-      testList.Add(stylist1.AddClient("jones", "bill"));
       testList.Add(stylist1.AddClient("james", "lebron"));
+      testList.Add(stylist1.AddClient("jones", "bill"));
       
       Stylist stylist2 = new Stylist("solo", "han");
       stylist2.Save();
