@@ -2,9 +2,35 @@
   Layout = "_Layout";
 }
 
-<div class='col-md-6'>
+<div class='col-md-5'>
+  <form action="stylists/search" method="post">
+    <div class='col-md-8'>
+      <input class='form-control' name='search' placeholder='Search Stylists'>
+    </div>
+    <div class='col-md-4'>
+      <button class='form-control btn btn-success'>Search</button>
+    </div>
+  </form>
+</div>
+<div class='col-md-2'></div>
+<div class='col-md-5'>
+  <form action="clients/search" method="post">
+    <div class='col-md-8'>
+      <input class='form-control' name='search' placeholder='Search Clients'>
+    </div>
+    <div class='col-md-4'>
+      <button class='form-control btn btn-success'>Search</button>
+    </div>
+  </form>
+</div>
+<br>
+<br>
+<br>
+
+<div class='col-md-5'>
   <a href="/stylists">See all stylists</a>
 </div>
-<div class='col-md-6'>
-  <a href="/clients/new">Add a new client</a>
+<div class='col-md-2'></div>
+<div class='col-md-5'>
+  <a href="/clients">See all clients</a>
 </div>

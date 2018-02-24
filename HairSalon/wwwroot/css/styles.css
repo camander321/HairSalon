@@ -8,9 +8,38 @@ body {
 }
 
 #content {
-  margin-top: 50px;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 .well {
   background-color: #000000dd;
+}
+
+.header {
+  margin: 0px;
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  max-height: 50;
+  color:#CCC;
+  padding-bottom: 12px;
+  background-color: #222222;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.footer {
+  margin: 0px;
+  position:fixed;
+  bottom:0px;
+  left:0px;
+  width:100%;
+  color:#CCC;
+  padding:18px;
+  padding-bottom: 24px;
+  background-color: #222222;
+  overflow: hidden;
+  white-space: nowrap;
 }

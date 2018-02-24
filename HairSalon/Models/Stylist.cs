@@ -123,6 +123,34 @@ namespace HairSalon.Models
       return stylist;
     }
     
+    public static List<Stylist> Search(string searchString)
+    {
+      List<Stylist> stylists = new List<Stylist>();
+      
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM stylists WHERE first_name LIKE @SearchString OR last_name LIKE @SearchString;";
+      cmd.Parameters.Add(new MySqlParameter("@SearchString", '%' + searchString + '%'));
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+      while(rdr.Read())
+      {
+        int id = rdr.GetInt32(0);
+        string lastName = rdr.GetString(1);
+        string firstName = rdr.GetString(2);
+        Stylist newStylist = new Stylist(lastName, firstName, id);
+        stylists.Add(newStylist);
+      }
+      
+      conn.Close();
+      if (conn != null)
+        conn.Dispose();
+      
+      return stylists;
+    }
+    
     public static List<Stylist> GetAll()
     {
       List<Stylist> allStylist = new List<Stylist>();

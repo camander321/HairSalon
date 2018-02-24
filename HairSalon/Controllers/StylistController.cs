@@ -39,5 +39,12 @@ namespace HairSalon.Controllers
       model.Add("clients", stylist.GetClients());
       return View("StylistDetails", model);
     }
+    
+    [HttpPost("/stylists/search")]
+    public ActionResult Search(int id)
+    {
+      List<Stylist> model = Stylist.Search(Request.Form["search"]);
+      return View("StylistIndex", model);
+    }
   }
 }

@@ -9,9 +9,10 @@
     <script type="text/javascript" src="~/js/scripts.js"></script>
   </head>
   <body>
+    @Html.Partial("Header")
     <div class="container well" id='content'>
-      <h1>EpiCuts</h1>
       @RenderBody()
     </div>
+    @Html.Partial("Footer")
   </body>
 </html>

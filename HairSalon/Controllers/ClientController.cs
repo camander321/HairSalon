@@ -7,9 +7,15 @@ namespace HairSalon.Controllers
 {
   public class ClientController : Controller
   {
+    
+    [HttpGet("/clients")]
+    public ActionResult Index()
+    {
+      return View("ClientIndex", Client.GetAll());
+    }
 
     [HttpGet("/clients/new")]
-    public ActionResult Index()
+    public ActionResult ClientCreateForm()
     {
       return View("ClientCreateForm", Stylist.GetAll());
     }
@@ -21,6 +27,13 @@ namespace HairSalon.Controllers
       model.Add("client", Client.Find(clientId));
       model.Add("stylist", Stylist.Find(stylistId));
       return View("ClientDetails", model);
+    }
+    
+    [HttpPost("/clients/search")]
+    public ActionResult Search(int id)
+    {
+      List<Client> model = Client.Search(Request.Form["search"]);
+      return View("ClientIndex", model);
     }
   }
 }
