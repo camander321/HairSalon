@@ -17,6 +17,7 @@ namespace HairSalon.Models.Tests
     public void Dispose()
     {
       Client.Clear();
+      Stylist.Clear();
     }
     
     
@@ -29,6 +30,26 @@ namespace HairSalon.Models.Tests
       List<Client> result = Client.GetAll();
       
       CollectionAssert.AreEqual(testList, result);
+    }
+    
+    [TestMethod]
+    public void Find_ReturnClientWithId_Client()
+    {
+      Client newClient = new Client("smith", "john");
+      newClient.Save();
+      Client result = Client.Find(newClient.GetId());
+      
+      Assert.AreEqual(newClient, result);
+    }
+    
+    [TestMethod]
+    public void Search_ReturnAllClientsWithStringInName_ListClient()
+    {
+      Client newClient = new Client("smith", "john");
+      newClient.Save();
+      List<Client> result = Client.Search("smi");
+      
+      CollectionAssert.AreEqual(new List<Client>{newClient}, result);
     }
   }
 }

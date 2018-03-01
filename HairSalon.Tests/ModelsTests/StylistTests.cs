@@ -52,5 +52,25 @@ namespace HairSalon.Models.Tests
       Assert.AreEqual(testList.Count, result.Count);
       CollectionAssert.AreEqual(testList, result);
     }
+    
+    [TestMethod]
+    public void Find_ReturnStylistWithId_Stylist()
+    {
+      Stylist newStylist = new Stylist("smith", "john");
+      newStylist.Save();
+      Stylist result = Stylist.Find(newStylist.GetId());
+      
+      Assert.AreEqual(newStylist, result);
+    }
+    
+    [TestMethod]
+    public void Search_ReturnAllStylistsWithStringInName_ListStylist()
+    {
+      Stylist newStylist = new Stylist("smith", "john");
+      newStylist.Save();
+      List<Stylist> result = Stylist.Search("smi");
+      
+      CollectionAssert.AreEqual(new List<Stylist>{newStylist}, result);
+    }
   }
 }
