@@ -1,0 +1,31 @@
+@{
+  Layout = "_Layout";
+}
+
+<h3>Edit Client Details</h3>
+<div class='col-md-4'></div>
+<div class='col-md-4'>
+  <form action='/clients/@Model["client"].GetId()/update' method="post">
+    <input class="form-control" name="first" value='@Model["client"].GetFirst()' placeholder="First Name">
+    <input class="form-control" name="last" value='@Model["client"].GetLast()' placeholder="Last Name">
+    
+    <select class="form-control" name="stylist" value='@Model["client"].GetStylist()'>
+      @{
+        foreach (var stylist in Model["stylists"])
+        {
+          if(stylist.GetId() == Model["client"].GetStylist())
+          {
+            <option value='@stylist.GetId()' selected='selected'>@stylist.GetFirst() @stylist.GetLast()</option>
+          }
+          else
+          {
+            <option value='@stylist.GetId()'>@stylist.GetFirst() @stylist.GetLast()</option>
+          }
+        }
+      }
+    </select>
+
+    <button class="form-control bn btn-info">Make Changes</button>
+  </form>
+</div>
+<div class='col-md-4'>

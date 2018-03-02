@@ -11,7 +11,7 @@ namespace HairSalon.Controllers
     [HttpGet("/stylists")]
     public ActionResult Index()
     {
-      return View("StylistIndex", Stylist.GetAll());
+      return View("Index", Stylist.GetAll());
     }
     
     [HttpPost("/stylists")]
@@ -19,15 +19,19 @@ namespace HairSalon.Controllers
     {
       string first = Request.Form["first"];
       string last = Request.Form["last"];
+      
+      if (first.Length == 0 || last.Length == 0)
+        return RedirectToAction("CreateForm");
+      
       Stylist newStylist = new Stylist(last, first);
       newStylist.Save();
-      return View("StylistIndex", Stylist.GetAll());
+      return View("Index", Stylist.GetAll());
     }
     
     [HttpGet("/stylists/new")]
-    public ActionResult StylistCreateForm()
+    public ActionResult CreateForm()
     {
-      return View("StylistCreateForm");
+      return View("CreateForm");
     }
     
     [HttpGet("/stylists/{id}")]
@@ -37,14 +41,14 @@ namespace HairSalon.Controllers
       Stylist stylist = Stylist.Find(id);
       model.Add("stylist", stylist);
       model.Add("clients", stylist.GetClients());
-      return View("StylistDetails", model);
+      return View("Details", model);
     }
     
     [HttpPost("/stylists/search")]
     public ActionResult Search(int id)
     {
       List<Stylist> model = Stylist.Search(Request.Form["search"]);
-      return View("StylistIndex", model);
+      return View("Index", model);
     }
   }
 }

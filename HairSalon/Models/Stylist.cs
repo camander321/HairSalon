@@ -50,12 +50,6 @@ namespace HairSalon.Models
       if (conn != null)
         conn.Dispose();
     }
-
-    
-    public void AddClient(Client newClient)
-    {
-      newClient.SetStylist(_id);
-    }
     
     public List<Client> GetClients()
     {

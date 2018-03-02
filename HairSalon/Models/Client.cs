@@ -24,11 +24,6 @@ namespace HairSalon.Models
     public string GetLast() {return _lastName;}
     public int GetStylist() {return _stylistId;}
     
-    public void SetStylist(int stylist)
-    {
-      _stylistId = stylist;
-    }
-    
     public override bool Equals(System.Object otherClient)
     {
       if (!(otherClient is Client))
@@ -137,6 +132,28 @@ namespace HairSalon.Models
       ";
       cmd.Parameters.AddWithValue("@lastName", _lastName);
       cmd.Parameters.AddWithValue("@firstName", _firstName);
+      cmd.Parameters.AddWithValue("@id", _id);
+      
+      cmd.ExecuteNonQuery();
+      
+      conn.Close();
+      if (conn != null)
+        conn.Dispose();
+    }
+    
+    public void ChangeStylist(int stylistId)
+    {
+      _stylistId = stylistId;
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"
+        UPDATE clients SET 
+        stylist = @stylist
+        WHERE id = @id;
+      ";
+      cmd.Parameters.AddWithValue("@stylist", _stylistId);
       cmd.Parameters.AddWithValue("@id", _id);
       
       cmd.ExecuteNonQuery();
