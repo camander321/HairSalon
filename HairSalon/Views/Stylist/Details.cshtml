@@ -1,12 +1,12 @@
 @{
   Layout = "_Layout";
+  var otherSpecialties = new System.Collections.Generic.List<HairSalon.Models.Specialty>();
 }
+
+<h2>Details For @Model["stylist"].GetFirst() @Model["stylist"].GetLast()</h2>
 
 <h3>Clients</h3>
 <table class='table table-bordered'>
-  <thead>
-    <th>Name</th>
-  </thead>
   <tbody>
     @foreach (var client in Model["clients"])
     {      
@@ -20,15 +20,38 @@
 <br>
 
 <h3>Specialties</h3>
+<h4>@Model["stylist"].GetFirst() @Model["stylist"].GetLast() has these specialties:</h4>
 <table class='table table-bordered'>
-  <thead>
-    <th>Name</th>
-  </thead>
   <tbody>
-    @foreach (var client in Model["clients"])
+    @foreach (var specialty in HairSalon.Models.Specialty.GetAll())
+    {      
+      @if(Model["specialties"].Contains(specialty))
+      {
+        <tr>
+          <td>
+              @specialty.GetName()
+              <a href='/stylists/@Model["stylist"].GetId()/specialties/@specialty.GetId()/remove'>Remove</a>
+          </td>
+        </tr>
+      }
+      else
+      {
+        otherSpecialties.Add(specialty);
+      }
+    }
+  </tbody>
+</table>
+
+<h4>@Model["stylist"].GetFirst() @Model["stylist"].GetLast() does not have these specialties:</h4>
+<table class='table table-bordered'>
+  <tbody>
+    @foreach (var specialty in otherSpecialties)
     {      
       <tr>
-        <td>@client.GetFirst() @client.GetLast()</td>
+        <td>
+          @specialty.GetName()
+          <a href='/stylists/@Model["stylist"].GetId()/specialties/@specialty.GetId()/add'>Add</a>
+        </td>
       </tr>
     }
   </tbody>

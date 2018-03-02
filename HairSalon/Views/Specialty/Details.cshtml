@@ -1,0 +1,44 @@
+@{
+  Layout = "_Layout";
+  var otherStylists = new System.Collections.Generic.List<HairSalon.Models.Stylist>();
+}
+
+<h2>Details For @Model["specialty"].GetName()</h2>
+
+<h3>Stylists</h3>
+<h4>These stylists have this specialty:</h4>
+<table class='table table-bordered'>
+  <tbody>
+    @foreach (var stylist in HairSalon.Models.Stylist.GetAll())
+    {      
+      @if(Model["stylists"].Contains(stylist))
+      {
+        <tr>
+          <td>
+              @stylist.GetFirst() @stylist.GetLast()
+              <a href='/specialties/@Model["specialty"].GetId()/stylists/@stylist.GetId()/remove'>Remove</a>
+          </td>
+        </tr>
+      }
+      else
+      {
+        otherStylists.Add(stylist);
+      }
+    }
+  </tbody>
+</table>
+
+<h4>These stylists do not have this specialty:</h4>
+<table class='table table-bordered'>
+  <tbody>
+    @foreach (var stylist in otherStylists)
+    {      
+      <tr>
+        <td>
+          @stylist.GetFirst() @stylist.GetLast()
+          <a href='/specialties/@Model["specialty"].GetId()/stylists/@stylist.GetId()/add'>Add</a>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

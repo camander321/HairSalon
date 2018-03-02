@@ -1,0 +1,28 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class='col-md-6'>
+  <a href="/specialties/new">Add a new Specialty</a>
+</div>
+<div class='col-md-6'>
+  <a href="/">Return to Home</a>
+</div>
+
+<table class='table table-bordered'>
+  <thead>
+    <th>Name</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+    @foreach (var specialty in Model)
+    {    
+      <tr>
+        <td><a href='/specialties/@specialty.GetId()'>@specialty.GetName()</a></td>
+        <td><a href='/specialties/@specialty.GetId()/edit'>Edit</a></td>
+        <td><a href='/specialties/@specialty.GetId()/delete'>Delete</a></td>
+      </tr>
+    }
+  </tbody>
+</table>

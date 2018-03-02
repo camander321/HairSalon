@@ -96,7 +96,6 @@ namespace HairSalon.Models
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT * FROM clients WHERE first_name LIKE @SearchString OR last_name LIKE @SearchString;";
       cmd.Parameters.AddWithValue("@SearchString", '%' + searchString + '%');
-      Console.WriteLine(cmd.CommandText);
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
 
       while(rdr.Read())

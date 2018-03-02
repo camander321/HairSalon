@@ -58,6 +58,28 @@ namespace HairSalon.Models
       if (conn != null)
         conn.Dispose();
     }
+    
+    public void EditName(string name)
+    {
+      _name = name;
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"
+        UPDATE specialties SET 
+        name = @name
+        WHERE id = @id;
+      ";
+      cmd.Parameters.AddWithValue("@name", _name);
+      cmd.Parameters.AddWithValue("@id", _id);
+      
+      cmd.ExecuteNonQuery();
+      
+      conn.Close();
+      if (conn != null)
+        conn.Dispose();
+    }
 
     public static List<Specialty> GetAll()
     {
@@ -145,17 +167,14 @@ namespace HairSalon.Models
       }
     }
 
-    public void AddStylist(Stylist stylist)
+    public void AddStylist(int stylistId)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
-      
-      Console.WriteLine(_id + " " + stylist.GetId());
-
       MySqlCommand cmd = conn.CreateCommand();
       cmd.CommandText = @"INSERT INTO stylists_specialties (stylist_id, specialty_id) VALUES (@StylistId, @SpecialtyId)";
       cmd.Parameters.Add(new MySqlParameter("@SpecialtyId", _id));
-      cmd.Parameters.Add(new MySqlParameter("@StylistId", stylist.GetId()));
+      cmd.Parameters.Add(new MySqlParameter("@StylistId", stylistId));
       cmd.ExecuteNonQuery();
 
       conn.Close();
@@ -192,6 +211,22 @@ namespace HairSalon.Models
         conn.Dispose();
 
       return stylists;
+    }
+    
+    public void RemoveStylist(int id)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      MySqlCommand cmd = conn.CreateCommand();
+      cmd.CommandText = @"DELETE FROM stylists_specialties WHERE stylist_id = @stylistId AND specialty_id = @specialtyId;";
+      cmd.Parameters.AddWithValue("@stylistId", id);
+      cmd.Parameters.AddWithValue("@specialtyId", _id);
+      cmd.ExecuteNonQuery();
+
+      conn.Close();
+      if (conn != null)
+        conn.Dispose();
     }
   }
 }

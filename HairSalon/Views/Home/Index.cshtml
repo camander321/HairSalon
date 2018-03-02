@@ -2,35 +2,40 @@
   Layout = "_Layout";
 }
 
-<div class='col-md-5'>
-  <form action="stylists/search" method="post">
-    <div class='col-md-8'>
-      <input class='form-control' name='search' placeholder='Search Stylists'>
-    </div>
-    <div class='col-md-4'>
-      <button class='form-control btn btn-success'>Search</button>
-    </div>
-  </form>
+<div class='col-md-6'>
+  <div class='row'>
+    <a href="/stylists"><button class='btn btn-info form-control'>See all stylists</button></a>
+  </div>
+  <br>
+  <div class='row'>
+    <a href="/specialties"><button class='btn btn-info form-control'>See all specialties</button></a>
+  </div>
+  <br>
+  <div class='row'>
+    <a href="/clients"><button class='btn btn-info form-control'>See all clients</button></a>
+  </div>
 </div>
-<div class='col-md-2'></div>
-<div class='col-md-5'>
-  <form action="clients/search" method="post">
-    <div class='col-md-8'>
-      <input class='form-control' name='search' placeholder='Search Clients'>
-    </div>
-    <div class='col-md-4'>
-      <button class='form-control btn btn-success'>Search</button>
-    </div>
-  </form>
-</div>
-<br>
-<br>
-<br>
 
-<div class='col-md-5'>
-  <a href="/stylists"><button class='btn btn-info form-control'>See all stylists</button></a>
-</div>
-<div class='col-md-2'></div>
-<div class='col-md-5'>
-  <a href="/clients"><button class='btn btn-info form-control'>See all clients</button></a>
+<div class='col-md-6'>
+  <div class='row'>
+    <form action="stylists/search" method="post">
+      <div class='col-md-8'>
+        <input class='form-control' name='search' placeholder='Search Stylists'>
+      </div>
+      <div class='col-md-4'>
+        <button class='form-control btn btn-success'>Search</button>
+      </div>
+    </form>
+  </div>
+  <br>
+  <div class='row'>
+    <form action="clients/search" method="post">
+      <div class='col-md-8'>
+        <input class='form-control' name='search' placeholder='Search Clients'>
+      </div>
+      <div class='col-md-4'>
+        <button class='form-control btn btn-success'>Search</button>
+      </div>
+    </form>
+  </div>
 </div>
