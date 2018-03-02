@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 02, 2018 at 11:13 PM
+-- Generation Time: Mar 02, 2018 at 11:17 PM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.1.5
 
@@ -19,10 +19,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cameron_anderson`
+-- Database: `cameron_anderson_test`
 --
-CREATE DATABASE IF NOT EXISTS `cameron_anderson` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `cameron_anderson`;
+CREATE DATABASE IF NOT EXISTS `cameron_anderson_test` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `cameron_anderson_test`;
 
 -- --------------------------------------------------------
 
@@ -37,14 +37,6 @@ CREATE TABLE `clients` (
   `stylist` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `clients`
---
-
-INSERT INTO `clients` (`id`, `last_name`, `first_name`, `stylist`) VALUES
-(3, 'D2', 'R2', 4),
-(5, 'Kenobi', 'Obi Wan', 3);
-
 -- --------------------------------------------------------
 
 --
@@ -55,14 +47,6 @@ CREATE TABLE `specialties` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `specialties`
---
-
-INSERT INTO `specialties` (`id`, `name`) VALUES
-(1, 'Buzz Cut'),
-(2, 'Layering');
 
 -- --------------------------------------------------------
 
@@ -76,14 +60,6 @@ CREATE TABLE `stylists` (
   `first_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `stylists`
---
-
-INSERT INTO `stylists` (`id`, `last_name`, `first_name`) VALUES
-(3, 'Skywalker', 'Luke'),
-(4, 'Anderson', 'Cameron');
-
 -- --------------------------------------------------------
 
 --
@@ -95,14 +71,6 @@ CREATE TABLE `stylists_specialties` (
   `stylist_id` int(11) NOT NULL,
   `specialty_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `stylists_specialties`
---
-
-INSERT INTO `stylists_specialties` (`id`, `stylist_id`, `specialty_id`) VALUES
-(7, 3, 2),
-(15, 3, 1);
 
 --
 -- Indexes for dumped tables
@@ -143,22 +111,22 @@ ALTER TABLE `stylists_specialties`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `specialties`
 --
 ALTER TABLE `specialties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `stylists`
 --
 ALTER TABLE `stylists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `stylists_specialties`
 --
 ALTER TABLE `stylists_specialties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --

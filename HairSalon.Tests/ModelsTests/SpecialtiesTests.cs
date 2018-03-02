@@ -64,8 +64,8 @@ namespace HairSalon.Models.Tests
       Specialty specialty = new Specialty("Buzz Cut");
       specialty.Save();
 
-      specialty.AddStylist(testStylist1);
-      specialty.AddStylist(testStylist3);
+      specialty.AddStylist(testStylist1.GetId());
+      specialty.AddStylist(testStylist3.GetId());
 
       CollectionAssert.AreEqual(new List<Stylist>{testStylist1, testStylist3}, specialty.GetStylists());
     }

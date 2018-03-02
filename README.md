@@ -51,7 +51,15 @@ A website to keep track of a hair salon's employees and all  of their clients.
   * `CREATE DATABASE IF NOT EXISTS cameron_anderson DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;`
   * `USE cameron_anderson;`
   * `CREATE TABLE clients (id int(11), last_name varchar(255), first_name varchar(255), stylist int(11)) ENGINE=InnoDB DEFAULT CHARSET=utf8;`
+  * `CREATE TABLE specialties (id int(11) NOT NULL, name varchar(255) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;`
   * `CREATE TABLE stylists (id int(11), last_name varchar(255), first_name varchar(255)) ENGINE=InnoDB DEFAULT CHARSET=utf8;`
+  * `CREATE TABLE stylists_specialties` (id int(11) NOT NULL, stylist_id int(11) NOT NULL, specialty_id int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;`
+  * `ALTER TABLE clients ADD PRIMARY KEY (id), ADD KEY stylist (stylist);`
+  * `ALTER TABLE specialties ADD PRIMARY KEY (`id`);`
+  * `ALTER TABLE stylists ADD PRIMARY KEY (`id`);`
+  * `ALTER TABLE stylists_specialties ADD PRIMARY KEY (id), ADD KEY stylist_id (stylist_id), ADD KEY specialty_id (specialty_id);`
+  * `ALTER TABLE clients ADD CONSTRAINT clients_ibfk_1 FOREIGN KEY (stylist) REFERENCES stylists (id) ON DELETE CASCADE;`
+  * `ALTER TABLE stylists_specialties ADD CONSTRAINT stylists_specialties_ibfk_1 FOREIGN KEY (stylist_id) REFERENCES stylists (id) ON DELETE CASCADE, ADD CONSTRAINT stylists_specialties_ibfk_2 FOREIGN KEY (specialty_id) REFERENCES specialties (id) ON DELETE CASCADE;`
   * `\q`
 * Clone the git repository from 'https://github.com/camander321/HairSalon.git'.
 * run the command 'dotnet restore' to download the necessary packages.
