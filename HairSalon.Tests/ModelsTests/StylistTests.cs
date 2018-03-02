@@ -83,5 +83,21 @@ namespace HairSalon.Models.Tests
       
       CollectionAssert.AreEqual(new List<Stylist>{newStylist}, result);
     }
+    
+    [TestMethod]
+    public void EditName_ChangeNameAndUpdateDatabase_Void()
+    {
+      Stylist newStylist = new Stylist("smith", "john");
+      newStylist.Save();
+      
+      newStylist.EditName("doe", "jane");
+      
+      Stylist result = Stylist.Find(newStylist.GetId());
+      
+      Assert.AreEqual(newStylist.GetId(), result.GetId());
+      Assert.AreEqual(newStylist.GetLast(), result.GetLast());
+      Assert.AreEqual(newStylist.GetFirst(), result.GetFirst());
+      Assert.AreEqual(newStylist, result);
+    }
   }
 }
