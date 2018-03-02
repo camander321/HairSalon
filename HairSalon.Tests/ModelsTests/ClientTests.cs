@@ -23,7 +23,9 @@ namespace HairSalon.Models.Tests
     [TestMethod]
     public void GetAll_ReturnAllClients_ListClient()
     {
-      Client newClient = new Client("smith", "john");
+      Stylist stylist = new Stylist("Skywalker", "Luke");
+      stylist.Save();
+      Client newClient = new Client("smith", "john", stylist.GetId());
       newClient.Save();
       List<Client> testList = new List<Client>{newClient};
       List<Client> result = Client.GetAll();
@@ -34,7 +36,9 @@ namespace HairSalon.Models.Tests
     [TestMethod]
     public void Find_ReturnClientWithId_Client()
     {
-      Client newClient = new Client("smith", "john");
+      Stylist stylist = new Stylist("Skywalker", "Luke");
+      stylist.Save();
+      Client newClient = new Client("smith", "john", stylist.GetId());
       newClient.Save();
       Client result = Client.Find(newClient.GetId());
       
@@ -44,7 +48,9 @@ namespace HairSalon.Models.Tests
     [TestMethod]
     public void Search_ReturnAllClientsWithStringInName_ListClient()
     {
-      Client newClient = new Client("smith", "john");
+      Stylist stylist = new Stylist("Skywalker", "Luke");
+      stylist.Save();
+      Client newClient = new Client("smith", "john", stylist.GetId());
       newClient.Save();
       List<Client> result = Client.Search("smi");
       
@@ -54,7 +60,9 @@ namespace HairSalon.Models.Tests
     [TestMethod]
     public void EditName_ChangeNameAndUpdateDatabase_Void()
     {
-      Client newClient = new Client("anderson", "cameron");
+      Stylist stylist = new Stylist("Skywalker", "Luke");
+      stylist.Save();
+      Client newClient = new Client("anderson", "cameron", stylist.GetId());
       newClient.Save();
       newClient.EditName("vader", "darth");
       

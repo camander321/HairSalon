@@ -66,15 +66,6 @@ namespace HairSalon.Controllers
       return View("Index", Client.GetAll());
     }
     
-    [HttpGet("/stylists/{stylistId}/clients/{clientId}")]
-    public ActionResult Index(int stylistId, int clientId)
-    {
-      Dictionary<string, object> model = new Dictionary<string, object>();
-      model.Add("client", Client.Find(clientId));
-      model.Add("stylist", Stylist.Find(stylistId));
-      return View("Details", model);
-    }
-    
     [HttpPost("/clients/search")]
     public ActionResult Search(int id)
     {
