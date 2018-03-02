@@ -48,9 +48,9 @@ namespace HairSalon.Models
       
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"INSERT INTO clients (last_name, first_name, stylist) VALUES (@lastName, @firstName, @stylist);";
-      cmd.Parameters.Add(new MySqlParameter("@lastName", _lastName));
-      cmd.Parameters.Add(new MySqlParameter("@firstName", _firstName));
-      cmd.Parameters.Add(new MySqlParameter("@stylist", _stylistId));
+      cmd.Parameters.AddWithValue("@lastName", _lastName);
+      cmd.Parameters.AddWithValue("@firstName", _firstName);
+      cmd.Parameters.AddWithValue("@stylist", _stylistId);
       
       cmd.ExecuteNonQuery();
       _id = (int)cmd.LastInsertedId;
@@ -100,7 +100,7 @@ namespace HairSalon.Models
       
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT * FROM clients WHERE first_name LIKE @SearchString OR last_name LIKE @SearchString;";
-      cmd.Parameters.Add(new MySqlParameter("@SearchString", '%' + searchString + '%'));
+      cmd.Parameters.AddWithValue("@SearchString", '%' + searchString + '%');
       Console.WriteLine(cmd.CommandText);
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
 
@@ -148,7 +148,22 @@ namespace HairSalon.Models
       return allClients;
     }
     
-    public static void Clear()
+    public void Delete()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM clients WHERE id = @Id;";
+      cmd.Parameters.AddWithValue("@Id", _id);
+      cmd.ExecuteNonQuery();
+
+      conn.Close();
+      if (conn != null)
+        conn.Dispose();
+    }
+    
+    public static void DeleteAll()
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();

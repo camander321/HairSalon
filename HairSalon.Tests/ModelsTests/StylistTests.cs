@@ -11,12 +11,12 @@ namespace HairSalon.Models.Tests
     public StylistTest()
     {
       DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=3306;database=cameron_anderson_test;";
-      Stylist.Clear();
     }
     
     public void Dispose()
     {
-      Stylist.Clear();
+      Stylist.DeleteAll();
+      Client.DeleteAll();
     }
     
     
@@ -38,14 +38,25 @@ namespace HairSalon.Models.Tests
       List<Client> testList = new List<Client>();
       
       Stylist stylist1 = new Stylist("smith", "john");
-      stylist1.Save();  
-      testList.Add(stylist1.AddClient("james", "lebron"));
-      testList.Add(stylist1.AddClient("jones", "bill"));
+      stylist1.Save();
+      
+      Client client1 = new Client("james", "lebron", stylist1.GetId());
+      client1.Save();
+      Client client2 = new Client("jones", "bill", stylist1.GetId());
+      client2.Save();
+      
+      testList.Add(client1);
+      testList.Add(client2);
+      
       
       Stylist stylist2 = new Stylist("solo", "han");
       stylist2.Save();
-      stylist2.AddClient("skywalker", "luke");
-      stylist2.AddClient("kenobi", "obi wan");
+      
+      Client client3 = new Client("skywalker", "luke", stylist2.GetId());
+      client3.Save();
+      Client client4 = new Client("kenobi", "obi wan", stylist2.GetId());
+      client4.Save();
+      
       
       List<Client> result = stylist1.GetClients();
       

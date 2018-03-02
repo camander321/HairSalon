@@ -50,19 +50,11 @@ namespace HairSalon.Models
       if (conn != null)
         conn.Dispose();
     }
+
     
-    public Client AddClient(string lastName, string firstName)
-    {
-      Client newClient = new Client(lastName, firstName, _id);
-      newClient.Save();
-      return newClient;
-    }
-    
-    public Client AddClient(Client newClient)
+    public void AddClient(Client newClient)
     {
       newClient.SetStylist(_id);
-      newClient.Save();
-      return newClient;
     }
     
     public List<Client> GetClients()
@@ -74,7 +66,7 @@ namespace HairSalon.Models
       
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT * FROM clients WHERE stylist = @stylist ORDER BY last_name, first_name;";
-      cmd.Parameters.Add(new MySqlParameter("@stylist", _id));
+      cmd.Parameters.AddWithValue("@stylist", _id);
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
 
       while(rdr.Read())
@@ -101,7 +93,7 @@ namespace HairSalon.Models
       
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT * FROM stylists WHERE id = @id;";
-      cmd.Parameters.Add(new MySqlParameter("@id", searchId));
+      cmd.Parameters.AddWithValue("@id", searchId);
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
 
       int id = 0;
@@ -132,7 +124,7 @@ namespace HairSalon.Models
       
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT * FROM stylists WHERE first_name LIKE @SearchString OR last_name LIKE @SearchString;";
-      cmd.Parameters.Add(new MySqlParameter("@SearchString", '%' + searchString + '%'));
+      cmd.Parameters.AddWithValue("@SearchString", '%' + searchString + '%');
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
 
       while(rdr.Read())
@@ -178,7 +170,22 @@ namespace HairSalon.Models
       return allStylist;
     }
     
-    public static void Clear()
+    public void Delete()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylists WHERE id = @Id;";
+      cmd.Parameters.AddWithValue("@Id", _id);
+      cmd.ExecuteNonQuery();
+
+      conn.Close();
+      if (conn != null)
+        conn.Dispose();
+    }
+    
+    public static void DeleteAll()
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
