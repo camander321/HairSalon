@@ -53,7 +53,7 @@ A website to keep track of a hair salon's employees and all  of their clients.
   * `CREATE TABLE clients (id int(11), last_name varchar(255), first_name varchar(255), stylist int(11)) ENGINE=InnoDB DEFAULT CHARSET=utf8;`
   * `CREATE TABLE specialties (id int(11) NOT NULL, name varchar(255) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;`
   * `CREATE TABLE stylists (id int(11), last_name varchar(255), first_name varchar(255)) ENGINE=InnoDB DEFAULT CHARSET=utf8;`
-  * `CREATE TABLE stylists_specialties` (id int(11) NOT NULL, stylist_id int(11) NOT NULL, specialty_id int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;`
+  * `CREATE TABLE stylists_specialties (id int(11) NOT NULL, stylist_id int(11) NOT NULL, specialty_id int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;`
   * `ALTER TABLE clients ADD PRIMARY KEY (id), ADD KEY stylist (stylist);`
   * `ALTER TABLE specialties ADD PRIMARY KEY (`id`);`
   * `ALTER TABLE stylists ADD PRIMARY KEY (`id`);`
