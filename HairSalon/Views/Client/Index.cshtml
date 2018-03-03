@@ -3,7 +3,12 @@
 }
 
 <div class='col-md-6'>
-  <a href="/clients/new">Add a new client</a>
+
+  @if (HairSalon.Models.Stylist.GetAll().Count > 0)
+  {
+    <a href="/clients/new">Add a new client</a>
+  }
+
 </div>
 <div class='col-md-6'>
   <a href="/">Return to Home</a>
